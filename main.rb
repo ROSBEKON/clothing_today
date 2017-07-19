@@ -10,38 +10,39 @@ end
 require_relative "lib/clothing"
 
 puts "Сколько градусов за окном? (можно с минусом)"
-puts
+user_input = gets.to_i
 
 def clothing_paths
   Dir.glob("./data/*.txt")
 end
-
-# films = []
-# directors = []
+#  массив общий в него пишем все из класса Clothing
+shared_arrays = []
+#  массив только типов одежды в этот массив пишем только типы одежды из класса Clothing
+type_arrays = []
 
 clothing_paths.each do |clothing_path|
-  clothing_set = Clothing.new(clothing_path)
-  puts clothing_set
-  # films << film
-  # directors << film.director
+  clothing = Clothing.new(clothing_path)
+  sample = (clothing.temperature).delete('(+)').split(', ').map(&:to_i)
+  if sample[1] >= user_input && sample[0] <= user_input
+    shared_arrays << clothing
+    type_arrays << clothing.type_clothing
+  end
 end
 
-# new_directors = directors.uniq
-#
-# new_directors.each_with_index do |new_director, index|
-#   puts "#{index + 1}: #{new_director}"
-# end
+new_type_arrays = type_arrays.uniq
+puts "Предлагаем сегодня надеть:"
+puts
 
-# puts
-# puts "Фильм какого режиссера вы хотите сегодня посмотреть?"
-# input_number = gets.to_i
-#
-# new_films = films.select{ |film| film.director == new_directors[input_number - 1] }
-# puts
-# puts "И сегодня вечером рекомендую посмотреть:"
-# random = new_films.sample
-# puts
-# puts "#{random.director} - #{random.title} #{random.year}"
+new_type_arrays.each do |new_type_array|
+  new_shared_arrays = shared_arrays.select{ |shared_array| shared_array.type_clothing == new_type_array}
+  random = new_shared_arrays.sample
+  puts "#{random.name_clothing} (#{random.type_clothing}) " \
+       "#{(random.temperature).delete('(+ )').sub(',', '..')}"
+end
+
+
+
+
 
 
 

@@ -1,7 +1,4 @@
 class Clothing
-
-
-
   def initialize(file_path)
     f = File.new(file_path, "r:UTF-8")
     content = f.readlines
@@ -10,7 +7,6 @@ class Clothing
     @type_clothing = content[1].chomp
     @temperature = content[2].chomp
   end
-
 
   def name_clothing
     return @name_clothing
@@ -23,9 +19,4 @@ class Clothing
   def temperature
     return  @temperature
   end
-
-  def info
-    return "#{@name_clothing}, #{@type_clothing}, #{@temperature}"
-  end
-
 end
