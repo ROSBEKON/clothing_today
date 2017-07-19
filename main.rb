@@ -39,25 +39,3 @@ new_type_arrays.each do |new_type_array|
   puts "#{random.name_clothing} (#{random.type_clothing}) " \
        "#{(random.temperature).delete('(+ )').sub(',', '..')}"
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
