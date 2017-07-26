@@ -1,16 +1,17 @@
 class Clothing
   def initialize(file_path, user_input)
+    @user_input = user_input
     content = File.readlines(file_path, encoding: "UTF-8")
-    if temp_value(content, user_input)
+    if if_under_the_temperature?(content)
       @name_clothing= content[0].chomp
       @type_clothing = content[1].chomp
       @temperature = content[2].chomp
     end
   end
 
-  def temp_value(content, user_input)
+  def if_under_the_temperature?(content)
     sample = (content[2].chomp).delete('(+)').split(', ').map(&:to_i)
-    if sample[1] >= user_input && sample[0] <= user_input
+    if sample[1] >= @user_input && sample[0] <= @user_input
       true
     end
   end
