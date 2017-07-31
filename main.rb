@@ -21,9 +21,11 @@ shared_arrays = []
 type_arrays = []
 
 clothing_paths.each do |clothing_path|
-  clothing = Clothing.new(clothing_path, user_input)
-  shared_arrays << clothing
-  type_arrays << clothing.type_clothing
+  clothing = Clothing.new(clothing_path)
+  if clothing.if_under_the_temperature?(clothing.temperature, user_input)
+    shared_arrays << clothing
+    type_arrays << clothing.type_clothing
+  end
 end
 
 new_type_arrays = type_arrays.uniq
