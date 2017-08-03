@@ -22,13 +22,15 @@ type_arrays = []
 
 clothing_paths.each do |clothing_path|
   clothing = Clothing.new(clothing_path)
-  if clothing.if_under_the_temperature?(clothing.temperature, user_input)
+
+  if clothing.if_under_the_temperature?( user_input)
     shared_arrays << clothing
     type_arrays << clothing.type_clothing
   end
 end
 
 new_type_arrays = type_arrays.uniq
+
 puts "Предлагаем сегодня надеть:"
 puts
 
@@ -36,5 +38,5 @@ new_type_arrays.each do |new_type_array|
   new_shared_arrays = shared_arrays.select{ |shared_array| shared_array.type_clothing == new_type_array }
   random = new_shared_arrays.sample
   puts "#{random.name_clothing} (#{random.type_clothing}) " \
-       "#{(random.temperature).delete('(+ )').sub(',', '..')}"
+       "#{random.temperature[0]}..#{random.temperature[1]}"
 end
